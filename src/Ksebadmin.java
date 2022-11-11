@@ -63,23 +63,20 @@ public class Ksebadmin {
                     try{
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
-                        String sql = "INSERT INTO `consumer`(`consumer_code`, `consumer_name`, `consumer_phone`, `consumer_email`, `consumer_adress`) VALUES WHERE `consumer_code` ='"+phone+"'  OR `consumer_name`='"+phone+"' OR`consumer_phone`='"+phone+"'";
+                        String sql = "SELECT `id`, `consumer_code`, `consumer_name`, `consumer_phone`, `consumer_email`, `consumer_adress` FROM `consumer` WHERE `consumer_code` ='"+phone+"'  OR `consumer_name`='"+phone+"' OR`consumer_phone`='"+phone+"'";
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(sql);
                         while(rs.next()){
-                            custCode = rs.getInt("consumer_code");
                             name = rs.getString("consumer_name");
-                            phone = rs.getString("consumer_phone");
-                            email = rs.getString("consumer_email");
                             address = rs.getString("consumer_adress");
-
-                            System.out.println("customer code = "+custCode);
+                            phone = rs.getString("consumer_phone");
+                            custCode = rs.getInt("consumer_code");
+                            email = rs.getString("consumer_email");
                             System.out.println("name = "+name);
-                            System.out.println("phone number = "+phone);
-                            System.out.println("Email id = "+email+'\n');
                             System.out.println("address = "+address);
-
-
+                            System.out.println("phone number = "+phone);
+                            System.out.println("customer code = "+custCode);
+                            System.out.println("Email id = "+email+'\n');
                         }
                     }
                     catch (Exception e){
