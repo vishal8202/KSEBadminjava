@@ -28,41 +28,32 @@ public class Ksebadmin {
             switch (choice){
                 case 1:
                     System.out.println("Add Consumer selected");
-
                     System.out.println("Enter Consumer Name: ");
                     String name = sc.next();
-
                     System.out.println("Enter Consumer Address: ");
                     String address = sc.next();
-
                     System.out.println("Enter Consumer Phone: ");
                     String phone = sc.next();
-
                     System.out.println("Enter the consumer code: ");
                     int custCode = sc.nextInt();
-
                     System.out.println("Enter Consumer Email Id: ");
                     String email = sc.next();
-
-                    try{
+                    try {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
                         String sql = "INSERT INTO `consumer`(`consumer_code`, `consumer_name`, `consumer_phone`, `consumer_email`, `consumer_adress`) VALUES (?,?,?,?,?)";
                         PreparedStatement stmt = con.prepareStatement(sql);
-                        stmt.setInt(4,custCode);
-                        stmt.setString(1,name);
-                        stmt.setString(3,phone);
-                        stmt.setString(5,email);
-                        stmt.setString(2,address);
+                        stmt.setString(2, name);
+                        stmt.setString(5, address);
+                        stmt.setString(3, phone);
+                        stmt.setInt(1, custCode);
+                        stmt.setString(4, email);
                         stmt.executeUpdate();
                         System.out.println("added successfully");
-
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println(e);
                     }
                     break;
-
 
 
                 case 2:
