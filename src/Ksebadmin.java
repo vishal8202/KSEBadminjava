@@ -119,7 +119,7 @@ public class Ksebadmin {
                     try{
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
-                        String sql = "UPDATE `consumer` SET `consumer_code`='"+custCode+"',`consumer_name`='"+name+"',`consumer_phone`='"+phone+"',`consumer_email`='"+email+"',`consumer_adress`='"+address+"' WHERE `consumer_code`='"+custCode+"'";
+                        String sql = "UPDATE `consumer` SET `consumer_name`='"+name+"',`consumer_adress`='"+address+"',`consumer_phone`='"+phone+"',`consumer_code`='"+custCode+"',`consumer_email`='"+email+"' WHERE `consumer_id`='"+custCode+"'";
                         Statement stmt = con.createStatement();
                         stmt.executeUpdate(sql);
                         System.out.println("Updated successfully");
@@ -207,6 +207,41 @@ public class Ksebadmin {
                     break;
                 case 7:
                     System.out.println("View Bill");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb","root","");
+                        String sql = "SELECT  b.`consumer_code`, b.`month`, b.`year`, b.`bill`, b.`paid_status`, b.`bill_date`, b.`total_units`, b.`duedate`, b.`invoice`,c.consumer_code,c.consumer_name FROM `bill` b JOIN consumer c ON b.consumer_code=c.id";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getConsumerId = rs.getString("consumer_code");
+                            String getMonth= rs.getString("month");
+                            String getYear = rs.getString("year");
+                            String getBill = rs.getString("bill");
+                            String getPaidStatus = rs.getString("paid_status");
+                            String getbilldate = rs.getString("bill_date");
+                            String getTotalUnit = rs.getString("total_units");
+                            String getDueDate = rs.getString("duedate");
+                            String getInvoice = rs.getString("invoice");
+                            String getConsumerCode = rs.getString("consumer_code");
+                            String getConsumerName = rs.getString("consumer_name");
+                            System.out.println("Consumer Id="+getConsumerId);
+                            System.out.println("Month="+getMonth);
+                            System.out.println("Year="+getYear);
+                            System.out.println("Bill ="+getBill);
+                            System.out.println("PaidStatus ="+getPaidStatus);
+                            System.out.println("Bill Date ="+getbilldate);
+                            System.out.println("Total Unit ="+getTotalUnit);
+                            System.out.println("Due Date ="+getDueDate);
+                            System.out.println("Invoice ="+getInvoice);
+                            System.out.println("Consumer Code ="+getConsumerCode);
+                            System.out.println("Consumer Name="+getConsumerName+"\n");
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
 
                     break;
                 case 8:
