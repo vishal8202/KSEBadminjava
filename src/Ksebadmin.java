@@ -119,7 +119,7 @@ public class Ksebadmin {
                     try{
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ksebdb", "root", "");
-                        String sql = "UPDATE `consumer` SET `consumer_name`='"+name+"',`consumer_adress`='"+address+"',`consumer_phone`='"+phone+"',`consumer_code`='"+custCode+"',`consumer_email`='"+email+"' WHERE `consumer_id`='"+custCode+"'";
+                        String sql = "UPDATE `consumer` SET `consumer_name`='"+name+"',`consumer_adress`='"+address+"',`consumer_phone`='"+phone+"',`consumer_code`='"+custCode+"',`consumer_email`='"+email+"' WHERE `consumer_code`='"+custCode+"'";
                         Statement stmt = con.createStatement();
                         stmt.executeUpdate(sql);
                         System.out.println("Updated successfully");
